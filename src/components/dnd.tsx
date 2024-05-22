@@ -43,7 +43,18 @@ export const Demo: React.FC = () => {
     const [draggableMoveItem, setDraggableMoveItem] = useState<ComponentItem>()
     return (
         <div style={styles.container}>
-            <div style={styles.draggableContainer}></div>
+            <div style={styles.draggableContainer}>
+                {componentOptions.map(config => (
+                    <div
+                        onDragEnd={e => {
+                            console.log('结束', config)
+                            console.log(e.dataTransfer)
+                        }}
+                        key={config.id} draggable style={{ width: 80, height: 80, border: '1px solid #e8e8e8' }} >
+                        {config.type}
+                    </div>
+                ))}
+            </div>
             <div style={styles.draggableContainer}>
                 <Form>
                     {components.map((config, index) =>
